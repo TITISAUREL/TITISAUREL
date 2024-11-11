@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.png">
+<title>Titis Aurel Blog</title>
+<!-- Bootstrap core CSS -->
+<link href="bootstrap.min.css" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="mediumish.css" rel="stylesheet">
+<style>
+    /* Styling untuk form komentar yang lebih kecil */
+    .comment-form input,
+    .comment-form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #fafafa;
+        color: #333;
+    }
+
+    .comment-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .comment-form button:hover {
+        background-color: #45a049;
+    }
+
+    .comment-list {
+        margin-top: 20px;
+    }
+
+    /* Styling untuk komentar yang lebih kecil */
+    .comment-item {
+        position: relative; /* Untuk memudahkan penempatan elemen absolute seperti tombol delete */
+        padding: 8px;
+        margin-bottom: 8px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 12px; /* Menurunkan ukuran font agar lebih banyak komentar yang muat */
+    }
+
+    .comment-item .author {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .comment-item .comment-text {
+        font-size: 12px; /* Ukuran font yang lebih kecil untuk teks komentar */
+        color: #555;
+    }
+
+    /* Styling untuk elipses (tiga titik) */
+    .ellipsis-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 16px;
+        color: #888;
+        cursor: pointer;
+    }
+
+    .ellipsis-btn:hover {
+        color: #333;
+    }
+
+    /* Styling untuk tombol delete yang muncul setelah klik elipses */
+    .delete-btn {
+        display: none; /* Awalnya tersembunyi */
+        background: none;
+        border: none;
+        color: red;
+        font-size: 12px;
+        cursor: pointer;
+        position: absolute;
+        top: 30px; /* Menempatkan tombol di bawah elipses */
+        right: 10px;
+    }
+
+    .delete-btn:hover {
+        text-decoration: underline;
+    }
+
+    /* Menampilkan tombol delete ketika elipses diklik */
+    .show-delete .delete-btn {
+        display: block;
+    }
+
+    /* Styling untuk footer */
+    .footer {
+        background-color: #f8f9fa;
+        color: #333;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    .footer p {
+        margin: 0;
+    }
+
+    .footer .social-links a {
+        color: #333;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+    .footer .social-links a:hover {
+        color: #4CAF50;
+    }
+
+    /* Styling untuk deskripsi sebelum komentar */
+    .blog-description {
+        background-color: #f1f1f1;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-description h3 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .blog-description p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+    }
+</style>
+
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+    <a class="navbar-brand" href="index.html">
+    <img src="logo.png" alt="logo">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+            <a class="nav-link" href="index.html">Article<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="post.html">About Blog</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="author.html">Author</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Site Title
+================================================== -->
+<div class="container">
+    <div class="mainheading">
+        <h1 class="sitetitle">Blog Algoritma & Pemograman</h1>
+        <p class="lead">
+             By Titis & Aurel
+        </p>
+    </div>
+<!-- End Site Title
+================================================== -->
+
+<!-- Begin Featured
+================================================== -->
+<section class="featured-posts">
+<div class="section-title">
+    <h2><span>Article</span></h2>
+</div>
+<div class="card-columns listfeaturedtag">
+
+    <!-- begin post -->
+    <div class="card">
+        <div class="row">
+            <div class="col-md-5 wrapthumbnail">
+                <a href="post.html">
+                    <div class="thumbnail" style="background-image:url(1.jpg);">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-7">
+                <div class="card-block">
+                    <h2 class="card-title"><a href="artikel1.html">Algoritma Menghitung Luas Persegi</a></h2>
+                    <h4 class="card-text">Artikel ini membahas cara mudah dan cepat untuk menghitung luas persegi menggunakan algoritma sederhana.</h4>
+                    <div class="metafooter">
+                        <div class="wrapfooter">
+                            <span class="meta-footer-thumb">
+                            <a href="author.html"><img class="author-thumb" src="avatar.jpg" alt="Sal"></a> </span>
+                            <span class="author-meta">
+                            <span class="post-name"><a href="author.html">Titis & Aurel</a></span><br/>
+                            <span class="post-date">10 November 2024</span><span class="dot"></span><span class="post-read">5 min read</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end post -->
+
+    <!-- begin post -->
+    <div class="card">
+        <div class="row">
+            <div class="col-md-5 wrapthumbnail">
+                <a href="post.html">
+                    <div class="thumbnail" style="background-image:url(2.jpg);">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-7">
+                <div class="card-block">
+                    <h2 class="card-title"><a href="artikel2.html">Algoritma Menentukan Bilangan Ganjil atau Genap</a></h2>
+                    <h4 class="card-text">Artikel ini menjelaskan langkah-langkah algoritma untuk menentukan apakah suatu bilangan termasuk ganjil atau genap.</h4>
+                    <div class="metafooter">
+                        <div class="wrapfooter">
+                            <span class="meta-footer-thumb">
+                            <a href="author.html"><img class="author-thumb" src="avatar.jpg" alt="Sal"></a>
+                            </span>
+                            <span class="author-meta">
+                            <span class="post-name"><a href="author.html">Titis & Aurel</a></span><br/>
+                            <span class="post-date">10 November 2024</span><span class="dot"></span><span class="post-read">5 min read</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end post -->
+
+    <!-- begin post -->
+    <div class="card">
+        <div class="row">
+            <div class="col-md-5 wrapthumbnail">
+                <a href="post.html">
+                    <div class="thumbnail" style="background-image:url(3.jpg);">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-7">
+                <div class="card-block">
+                    <h2 class="card-title"><a href="artikel3.html">Algoritma Menentukan Bilangan Terbesar dari 3 Bilangan</a></h2>
+                    <h4 class="card-text">Artikel ini membahas langkah-langkah untuk membuat algoritma yang dapat menentukan bilangan terbesar di antara tiga bilangan yang diberikan. </h4>
+                    <div class="metafooter">
+                        <div class="wrapfooter">
+                            <span class="meta-footer-thumb">
+                            <a href="author.html"><img class="author-thumb" src="avatar.jpg" alt="Sal"></a>
+                            </span>
+                            <span class="author-meta">
+                            <span class="post-name"><a href="author.html">Titis & Aurel</a></span><br/>
+                            <span class="post-date">10 November 2024</span><span class="dot"></span><span class="post-read">5 min read</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end post -->
+
+    <!-- begin post -->
+    <div class="card">
+        <div class="row">
+            <div class="col-md-5 wrapthumbnail">
+                <a href="post.html">
+                    <div class="thumbnail" style="background-image:url(4.jpg);">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-7">
+                <div class="card-block">
+                    <h2 class="card-title"><a href="artikel4.html">Algoritma Menghitung Rata-rata dari N Bilangan</a></h2>
+                    <h4 class="card-text">Artikel ini menjelaskan cara membuat algoritma untuk menghitung rata-rata dari N bilangan yang diberikan.</h4>
+                    <div class="metafooter">
+                        <div class="wrapfooter">
+                            <span class="meta-footer-thumb">
+                            <a href="author.html"><img class="author-thumb" src="avatar.jpg" alt="Sal"></a>
+                            </span>
+                            <span class="author-meta">
+                            <span class="post-name"><a href="author.html">Titis & Aurel</a></span><br/>
+                            <span class="post-date">10 November 2024</span><span class="dot"></span><span class="post-read">5 min read</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end post -->
+
+</div>
+</section>
+<!-- End Featured
+================================================== -->
+
+<!-- Begin Blog Description (Sebelum Kolom Komentar) -->
+<section class="blog-description">
+    <h3>Selamat datang di Blog Algoritma & Pemrograman</h3>
+    <p>
+        Di blog ini, kami berbagi artikel-artikel menarik mengenai algoritma, pemrograman, dan berbagai topik terkait dunia teknologi. 
+        Baik Anda seorang pemula yang baru belajar pemrograman ataupun seorang profesional, Anda akan menemukan berbagai artikel yang bermanfaat. 
+        Ikuti kami untuk mendapatkan tips, tutorial, dan penjelasan algoritma yang mudah dipahami. Jangan ragu untuk berbagi pendapat Anda melalui komentar di bawah ini!
+    </p>
+</section>
+<!-- End Blog Description -->
+
+<!-- Begin Kolom Komentar -->
+<section id="comments">
+    <div class="container">
+        <h2>Leave a Comment</h2>
+
+        <!-- Formulir untuk mengirim komentar -->
+        <div class="comment-form">
+            <input type="text" id="author" placeholder="Nama Anda" required>
+            <textarea id="comment" rows="3" placeholder="Tulis komentar Anda..." required></textarea>
+            <button onclick="addComment()">Kirim Komentar</button>
+        </div>
+
+        <!-- Daftar komentar -->
+        <div class="comment-list" id="commentList">
+            <!-- Komentar akan ditampilkan di sini -->
+        </div>
+    </div>
+</section>
+<!-- End Kolom Komentar -->
+
+<!-- Begin Footer -->
+<div class="footer">
+    <p>&copy; 2024 Titis & Aurel. All Rights Reserved.</p>
+</div>
+<!-- End Footer -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="bootstrap.min.js"></script>
+
+<!-- JavaScript untuk mengelola komentar -->
+<script>
+ // Fungsi untuk menambah komentar
+function addComment() {
+    const author = document.getElementById('author').value;
+    const commentText = document.getElementById('comment').value;
+
+    if (author && commentText) {
+        // Membuat elemen baru untuk komentar
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment-item');
+
+        // Menambahkan nama dan komentar ke dalam elemen
+        commentItem.innerHTML = `
+            <div class="author">${author}</div>
+            <div class="comment-text">${commentText}</div>
+            <span class="ellipsis-btn" onclick="toggleDelete(this)">...</span>
+            <button class="delete-btn" onclick="deleteComment(this)">Delete</button>
+        `;
+
+        // Menambahkan elemen komentar di bagian atas daftar komentar
+        const commentList = document.getElementById('commentList');
+        commentList.insertBefore(commentItem, commentList.firstChild);
+
+        // Menyimpan komentar ke LocalStorage
+        saveComments();
+
+        // Kosongkan form setelah komentar ditambahkan
+        document.getElementById('author').value = '';
+        document.getElementById('comment').value = '';
+    } else {
+        alert('Mohon isi nama dan komentar Anda!');
+    }
+}
+
+// Fungsi untuk menghapus komentar
+function deleteComment(button) {
+    const commentItem = button.parentElement;
+    commentItem.remove();
+
+    // Menyimpan perubahan setelah komentar dihapus
+    saveComments();
+}
+
+// Fungsi untuk menyimpan komentar ke LocalStorage
+function saveComments() {
+    const comments = [];
+    const commentItems = document.querySelectorAll('.comment-item');
+    commentItems.forEach(item => {
+        const author = item.querySelector('.author').textContent;
+        const text = item.querySelector('.comment-text').textContent;
+        comments.push({ author, text });
+    });
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+// Fungsi untuk memuat komentar dari LocalStorage saat halaman dimuat
+function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.forEach(comment => {
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment-item');
+        commentItem.innerHTML = `
+            <div class="author">${comment.author}</div>
+            <div class="comment-text">${comment.text}</div>
+            <span class="ellipsis-btn" onclick="toggleDelete(this)">...</span>
+            <button class="delete-btn" onclick="deleteComment(this)">Delete</button>
+        `;
+        document.getElementById('commentList').appendChild(commentItem);
+    });
+}
+
+// Fungsi untuk toggle tampilan tombol delete
+function toggleDelete(ellipsis) {
+    const commentItem = ellipsis.parentElement;
+    commentItem.classList.toggle('show-delete');
+}
+
+// Memuat komentar ketika halaman dimuat
+window.onload = loadComments;
+omments;
+
+</script>
+
+</body>
+</html>
